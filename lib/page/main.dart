@@ -1,9 +1,9 @@
-import 'package:agile_frontend/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
 import 'intro_page.dart';
+import 'login_page.dart';
 import 'my_home_page.dart';
 
 void main() {
