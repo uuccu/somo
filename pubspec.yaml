@@ -76,6 +76,8 @@ flutter:
 
     assets:
         - asset/image/
+        - asset/image/login_logo/
+        - asset/image/home_page/
         
 
     # To add assets to your application, add an assets section, like this:
