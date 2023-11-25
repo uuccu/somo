@@ -5,6 +5,8 @@ class Screen {
   static const double _figmaWidth = 430;
   static const double _figmaHeight = 932;
 
+  static double _width(BuildContext context) =>
+      MediaQuery.of(context).size.width;
   static double _heightWithoutStatusBarAndBottomBar(BuildContext context) =>
       MediaQuery.of(context).size.height -
       MediaQuery.of(context).padding.top -
@@ -24,6 +26,9 @@ class Screen {
   static double designToScreenWidth(BuildContext context, double designWidth) =>
       _widthWithoutLeftRight(context) * designWidth / Screen._figmaWidth;
 
+  static double designToFontSize(BuildContext context, double designFontSize) =>
+      _width(context) * designFontSize / Screen._figmaWidth;
+
   // static double safeAreaHeight(BuildContext context) =>
   //     MediaQuery.of(context).padding.top +
   //     MediaQuery.of(context).padding.bottom;
@@ -41,8 +46,6 @@ class Screen {
   // static double safeAreaWidthWithoutLeft(BuildContext context) =>
   //     MediaQuery.of(context).padding.left;
 
-  // static double _width(BuildContext context) =>
-  //     MediaQuery.of(context).size.width;
   // static double height(BuildContext context) =>
   //     MediaQuery.of(context).size.height;
 

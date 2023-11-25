@@ -17,20 +17,18 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Padding(
               padding: EdgeInsets.only(
-                  top: Screen.designToScreenHeight(context, 68))),
+            top: Screen.designToScreenHeight(context, 68),
+          )),
+          const Text(
+            'House you\'re\nlooking for! ',
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontFamily: 'hgg',
+              fontSize: 50,
+            ),
+          ),
           Column(
             children: [
-              Padding(
-                  padding: EdgeInsets.only(
-                      left: Screen.designToScreenWidth(context, 20))),
-              Text(
-                'House you\'re\nlooking for! ',
-                style: TextStyle(
-                  fontSize: 50,
-                  // fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
               Padding(
                   padding: EdgeInsets.only(
                       bottom: Screen.designToScreenHeight(context, 9))),
