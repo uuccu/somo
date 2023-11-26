@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../util/device/screen.dart';
+import 'google_map_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -117,7 +119,7 @@ class HouseBoxWidget extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        print("Pressed\n$text"); // todo
+        Get.to(GoogleMapPage());
       },
       child: Stack(
         children: <Widget>[

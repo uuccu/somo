@@ -1,4 +1,5 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GoogleMapPage extends StatefulWidget {
   @override
@@ -8,6 +9,16 @@ class GoogleMapPage extends StatefulWidget {
 class _GoogleMapPageState extends State<GoogleMapPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Google Map"),
+      ),
+      body: const GoogleMap(
+        initialCameraPosition: CameraPosition(
+          target: LatLng(11.34056, 104.53261),
+          zoom: 13,
+        ),
+      ),
+    );
   }
 }
