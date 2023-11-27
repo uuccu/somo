@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         Padding(
             padding: EdgeInsets.only(
-                bottom: Screen.designToScreenHeight(context, 368 - 237 - 121))),
+                bottom: Screen.designToScreenHeight(context, 10))),
         Row(
           children: [
             Padding(
