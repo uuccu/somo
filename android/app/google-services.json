@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1052084737726",
+    "project_id": "somo-406211",
+    "storage_bucket": "somo-406211.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052084737726:android:8832b9033842628474b0ef",
+        "android_client_info": {
+          "package_name": "com.example.agile_frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCknnhDpcguvwt54FJZ1HGh90XZ9MJ30oc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
