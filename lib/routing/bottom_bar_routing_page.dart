@@ -50,7 +50,7 @@ class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.people),
+            icon: Icon(Icons.access_time_filled_sharp),
             label: 'Community',
             backgroundColor: Colors.black,
           ),
