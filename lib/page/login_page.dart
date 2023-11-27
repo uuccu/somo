@@ -1,7 +1,11 @@
+import 'package:agile_frontend/page/auth/login_without.dart';
+import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
 import 'package:agile_frontend/util/device/screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../widget/login_button_widget.dart';
+import 'my_home_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -28,21 +32,33 @@ class _LoginPageState extends State {
                 height: Screen.designToScreenHeight(context, 212),
               ),
             ),
-            const LoginButtonWidget(
+            LoginButtonWidget(
               text: 'Login With Facebook',
               imageUrl: 'asset/image/login_logo/facebook_logo.png',
+              onPressed: () {
+                Get.offAll(() => const MyHomePage());
+              },
             ),
-            const LoginButtonWidget(
+            LoginButtonWidget(
               text: 'Login With Apple',
               imageUrl: 'asset/image/login_logo/apple_logo.png',
+              onPressed: () {
+                Get.offAll(() => const MyHomePage());
+              },
             ),
-            const LoginButtonWidget(
+            LoginButtonWidget(
               text: 'Login With Google',
               imageUrl: 'asset/image/login_logo/google_logo.png',
+              onPressed: () {
+                Get.offAll(() => const MyHomePage());
+              },
             ),
-            const LoginButtonWidget(
+            LoginButtonWidget(
               text: 'Browse without Login',
               imageUrl: null,
+              onPressed: () {
+                Get.to(() => const LoginWithout());
+              },
             ),
             Row(
               children: [
@@ -84,8 +100,14 @@ class _LoginPageState extends State {
                 ),
               ],
             ),
-            const Image(
-                image: AssetImage('asset/image/login_logo/twitter_logo.png')),
+            GestureDetector(
+              onTap: () {
+                Get.offAll(() => BottomBarRoutingPage());
+              },
+              child: const Image(
+                image: AssetImage('asset/image/login_logo/twitter_logo.png'),
+              ),
+            ),
             Padding(
               padding: EdgeInsets.only(
                 top: Screen.designToScreenHeight(context, 30),
