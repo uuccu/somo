@@ -1,10 +1,12 @@
+import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
-import 'intro_page.dart';
-import 'login_page.dart';
-import 'my_home_page.dart';
+import 'page/intro_page.dart';
+import 'page/login_page.dart';
+import 'page/my_home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +32,11 @@ class MyApp extends StatelessWidget {
           // if (userInfo != null) {
           //   return userInfo;
           // }
-          Duration duration = const Duration(seconds: 3);
+
+          WidgetsFlutterBinding.ensureInitialized();
+          await Firebase.initializeApp();
+
+          Duration duration = const Duration(seconds: 1);
           await Future.delayed(duration, () {
             Get.offAll(LoginPage());
           });
@@ -52,11 +58,14 @@ Widget _splashLoadingWidget(AsyncSnapshot snapshot) {
   } else if (snapshot.hasData) {
     var userInfo = snapshot.data;
     if (userInfo != "") {
-      return const MyHomePage();
+      // already logged in (token exists)
+      return BottomBarRoutingPage();
     } else {
+      // not logged in (token does not exist)
       return LoginPage();
     }
   } else {
+    // loading
     return const IntroPage();
   }
 }

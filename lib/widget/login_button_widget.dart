@@ -10,9 +10,11 @@ class LoginButtonWidget extends StatelessWidget {
     super.key,
     required this.text,
     required this.imageUrl,
+    required this.onPressed,
   });
   final String text;
   final String? imageUrl;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +45,7 @@ class LoginButtonWidget extends StatelessWidget {
         width: 280,
         height: 41,
         radius: 8,
-        onPressed: () {
-          Get.offAll(() => const MyHomePage());
-        },
+        onPressed: onPressed,
         boxContents: contents,
       ),
     );
