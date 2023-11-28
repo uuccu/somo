@@ -34,11 +34,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: EdgeInsets.only(
                     bottom: Screen.designToScreenHeight(context, 9))),
             SizedBox(
-              width: Screen.designToScreenWidth(context, 390),
-              height: Screen.designToScreenWidth(context, 33),
-              child: const Text(
-                  "We have to apply search widget here!"), //todo Lim Chae Yeong
-            ),
+                width: Screen.designToScreenWidth(context, 390),
+                height: Screen.designToScreenWidth(context, 33),
+                child: const SizedBox(
+                  child: Text("asdfasdfasdfss"),
+                )),
           ],
         ),
         Row(
