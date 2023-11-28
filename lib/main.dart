@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 import 'page/intro_page.dart';
 import 'page/login_page.dart';
-import 'page/my_home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,9 +36,9 @@ class MyApp extends StatelessWidget {
           await Firebase.initializeApp();
 
           Duration duration = const Duration(seconds: 1);
-          await Future.delayed(duration, () {
-            Get.offAll(LoginPage());
-          });
+          // await Future.delayed(duration, () {
+          //   Get.offAll(LoginPage());
+          // });
           return "";
         }(),
         builder: (context, snapshot) {
@@ -54,7 +53,7 @@ class MyApp extends StatelessWidget {
 
 Widget _splashLoadingWidget(AsyncSnapshot snapshot) {
   if (snapshot.hasError) {
-    return Text("Error: ${snapshot.error}");
+    return Text("Error1: ${snapshot.error}");
   } else if (snapshot.hasData) {
     var userInfo = snapshot.data;
     if (userInfo != "") {
