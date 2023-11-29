@@ -1,21 +1,48 @@
 import 'package:agile_frontend/page/my_home_page.dart';
 import 'package:flutter/material.dart';
 
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text('Home Page'),
+    );
+  }
+}
+
+class SavedPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text('Saved Page'),
+    );
+  }
+}
+
 class BottomBarRoutingPage extends StatefulWidget {
   @override
   _BottomBarRoutingPageState createState() => _BottomBarRoutingPageState();
 }
 
 class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
-  int selectedIndex = 0;
+  ValueNotifier<int> selectedIndex = ValueNotifier<int>(0);
   List<Widget> navBarPages = [
-    const MyHomePage(),
-    // const SavedPage(),
+    MyHomePage(),
+    SavedPage(),
     // const Text('add'),
     // const MapPage(),
     // const CommunityPage(),
     // const ProfilePage(),
   ];
+
+  dispose() {
+    selectedIndex.dispose();
+    super.dispose();
+  }
+
+  void _onItemTapped(int index) {
+    selectedIndex.value = index;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +52,14 @@ class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
           Navigator.pop(context);
         },
       )),
-      body: navBarPages[selectedIndex],
+      body: AnimatedBuilder(
+        animation: selectedIndex,
+        builder: (BuildContext context, Widget child) {
+          return navBarPages[selectedIndex.value];
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const [
+        items: const <BottomNavigationBarItem>[
           // Lim Chae Yeong
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -39,11 +71,11 @@ class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
             label: 'Saved',
             backgroundColor: Colors.black,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Add',
-            backgroundColor: Colors.black,
-          ),
+          //BottomNavigationBarItem(
+          //icon: Icon(Icons.add),
+          //label: 'Add',
+          //backgroundColor: Colors.black,
+          //),
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
             label: 'Map',
@@ -62,11 +94,7 @@ class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
         ],
         currentIndex: selectedIndex,
         selectedItemColor: Colors.amber[800],
-        onTap: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
+        onTap: _onItemTapped,
       ),
     );
   }
