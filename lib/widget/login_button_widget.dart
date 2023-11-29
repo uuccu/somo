@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../page/my_home_page.dart';
 import '../util/device/screen.dart';
 import 'button_widget.dart';
