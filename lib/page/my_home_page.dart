@@ -1,8 +1,7 @@
+import 'package:agile_frontend/widget/house_box_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../util/device/screen.dart';
-import 'google_map_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -16,16 +15,20 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-            padding: EdgeInsets.only(
-          top: Screen.designToScreenHeight(context, 68),
-        )),
-        const Text(
-          'House you\'re\nlooking for! ',
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            fontFamily: 'hgg',
-            fontSize: 50,
+        const Align(
+          alignment: Alignment.topLeft,
+          child: Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: Text(
+              'House you\'re\nlooking for! ',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'hgg',
+                fontSize: 60,
+              ),
+            ),
           ),
         ),
         Column(
@@ -84,57 +87,36 @@ class _MyHomePageState extends State<MyHomePage> {
           padding:
               EdgeInsets.only(bottom: Screen.designToScreenHeight(context, 11)),
         ),
-      ],
-    );
-  }
-}
-
-class HouseBoxWidget extends StatelessWidget {
-  const HouseBoxWidget({
-    super.key,
-    required this.imageUrl,
-    required this.text,
-  });
-
-  final String text;
-  final String imageUrl;
-
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-      style: OutlinedButton.styleFrom(
-        foregroundColor: Colors.black,
-        fixedSize: Size(
-          Screen.designToScreenWidth(context, 189),
-          Screen.designToScreenHeight(context, 121),
-        ),
-        side: const BorderSide(
-          color: Colors.grey,
-          width: 0.5,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
-        ),
-      ),
-      onPressed: () {
-        Get.to(GoogleMapPage());
-      },
-      child: Stack(
-        children: <Widget>[
-          Align(
-            alignment: Alignment(-1, -0.8),
-            child: Text(text),
-          ),
-          Align(
-            alignment: Alignment(1.4, 0.7),
-            child: Image(
-              width: Screen.designToScreenWidth(context, 60),
-              height: Screen.designToScreenHeight(context, 60),
-              image: AssetImage(imageUrl),
+        OutlinedButton(
+          style: OutlinedButton.styleFrom(
+            foregroundColor: Colors.black,
+            fixedSize: Size(390, 36),
+            side: const BorderSide(
+              color: Colors.grey,
+              width: 0.5,
+            ),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
             ),
           ),
-        ],
-      ),
+          onPressed: () {},
+          child: const Text('Want to sell my home'),
+        ),
+        const Align(
+          alignment: Alignment.topLeft,
+          child: Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: Text(
+              'Today\'s recommendation in Phnom penh',
+              style: TextStyle(
+                fontFamily: 'hgg',
+                fontSize: 20,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

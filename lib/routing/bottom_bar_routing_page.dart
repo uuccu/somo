@@ -20,11 +20,13 @@ class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(leading: BackButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      )),
+      appBar: AppBar(
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: navBarPages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [

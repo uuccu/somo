@@ -1,14 +1,24 @@
 import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
+import 'package:agile_frontend/service/house_data_provider_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import 'page/intro_page.dart';
 import 'page/login_page.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => (HouseDataProviderService()),
+      ),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -36,15 +46,16 @@ class MyApp extends StatelessWidget {
           await Firebase.initializeApp();
 
           Duration duration = const Duration(seconds: 1);
-          // await Future.delayed(duration, () {
-          //   Get.offAll(LoginPage());
-          // });
+          await Future.delayed(duration, () {
+            Get.offAll(LoginPage());
+          });
           return "";
         }(),
         builder: (context, snapshot) {
           return AnimatedSwitcher(
-              duration: const Duration(milliseconds: 1000),
-              child: _splashLoadingWidget(snapshot));
+            duration: const Duration(milliseconds: 1000),
+            child: _splashLoadingWidget(snapshot),
+          );
         },
       ),
     );
