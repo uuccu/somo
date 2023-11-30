@@ -1,11 +1,9 @@
-import 'package:agile_frontend/page/auth/login_without.dart';
 import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
 import 'package:agile_frontend/util/device/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../widget/login_button_widget.dart';
-import 'my_home_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -36,28 +34,28 @@ class _LoginPageState extends State {
               text: 'Login With Facebook',
               imageUrl: 'asset/image/login_logo/facebook_logo.png',
               onPressed: () {
-                Get.offAll(() => const MyHomePage());
+                Get.to(() => BottomBarRoutingPage());
               },
             ),
             LoginButtonWidget(
               text: 'Login With Apple',
               imageUrl: 'asset/image/login_logo/apple_logo.png',
               onPressed: () {
-                Get.offAll(() => const MyHomePage());
+                Get.to(() => BottomBarRoutingPage());
               },
             ),
             LoginButtonWidget(
               text: 'Login With Google',
               imageUrl: 'asset/image/login_logo/google_logo.png',
               onPressed: () {
-                Get.offAll(() => const MyHomePage());
+                Get.to(() => BottomBarRoutingPage());
               },
             ),
             LoginButtonWidget(
               text: 'Browse without Login',
               imageUrl: null,
               onPressed: () {
-                Get.to(() => const LoginWithout());
+                Get.to(() => BottomBarRoutingPage());
               },
             ),
             Row(
