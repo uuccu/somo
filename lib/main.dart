@@ -2,6 +2,7 @@ import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
 import 'package:agile_frontend/service/house_data_provider_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -45,8 +46,9 @@ class MyApp extends StatelessWidget {
           WidgetsFlutterBinding.ensureInitialized();
           await Firebase.initializeApp();
 
-          context.read<HouseDataProviderService>().addData();
-
+          FirebaseStorage _storage = FirebaseStorage.instance;
+          Reference _ref = _storage.ref("test/text");
+          _ref.putString("Hello World !!");
           Duration duration = const Duration(seconds: 1);
           await Future.delayed(duration, () {
             Get.offAll(LoginPage());
