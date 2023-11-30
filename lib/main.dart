@@ -45,6 +45,8 @@ class MyApp extends StatelessWidget {
           WidgetsFlutterBinding.ensureInitialized();
           await Firebase.initializeApp();
 
+          context.read<HouseDataProviderService>().addData();
+
           Duration duration = const Duration(seconds: 1);
           await Future.delayed(duration, () {
             Get.offAll(LoginPage());

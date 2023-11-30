@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
         OutlinedButton(
           style: OutlinedButton.styleFrom(
             foregroundColor: Colors.black,
-            fixedSize: Size(390, 36),
+            fixedSize: const Size(390, 36),
             side: const BorderSide(
               color: Colors.grey,
               width: 0.5,
