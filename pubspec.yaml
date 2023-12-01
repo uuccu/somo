@@ -86,6 +86,8 @@ flutter:
         - asset/image/login_logo/
         - asset/image/home_page/
         - asset/font/
+        - asset/image/agent_init_data/
+        - asset/image/house/pic.png
 
     fonts:
         - family: apple

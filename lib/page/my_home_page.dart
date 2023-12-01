@@ -15,11 +15,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Align(
+        Align(
           alignment: Alignment.topLeft,
           child: Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text(
+            padding: EdgeInsets.only(
+              left: Screen.designToScreenHeight(context, 20),
+              top: Screen.designToScreenHeight(context, 68),
+            ),
+            child: const Text(
               'House you\'re\nlooking for! ',
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -90,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
         OutlinedButton(
           style: OutlinedButton.styleFrom(
             foregroundColor: Colors.black,
-            fixedSize: const Size(390, 36),
+            fixedSize: Size(390, 36),
             side: const BorderSide(
               color: Colors.grey,
               width: 0.5,

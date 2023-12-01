@@ -1,11 +1,12 @@
 import 'package:agile_frontend/firebase/firebase_options.dart';
 import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
 import 'package:agile_frontend/service/house_data_provider_service.dart';
+import 'package:agile_frontend/util/db/firebase_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
 import 'page/intro_page.dart';
@@ -44,18 +45,18 @@ class MyApp extends StatelessWidget {
           // }
 
           WidgetsFlutterBinding.ensureInitialized();
-          // await Firebase.initializeApp(
-          //   options: DefaultFirebaseOptions.currentPlatform,
-          // );
+          await Firebase.initializeApp(
+            options: DefaultFirebaseOptions.currentPlatform,
+          );
 
-          // FirebaseStorage _storage = FirebaseStorage.instance;
-          // Reference _ref = _storage.ref("test/text");
-          // _ref.putString("Hello World !!");
+          final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-          Duration duration = const Duration(seconds: 1);
-          await Future.delayed(duration, () {
-            Get.offAll(LoginPage());
+          await _firestore.collection('agent').get().then((value) {
+            FirebaseFireStore().initData();
           });
+          Duration duration = const Duration(seconds: 1);
+
+          await Future.delayed(duration);
           return "";
         }(),
         builder: (context, snapshot) {
