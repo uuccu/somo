@@ -27,7 +27,7 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Text('Padding'),
           ),
           Container(
-            color: Colors.black,
+            color: Colors.transparent,
             padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
             child: Row(
               children: <Widget>[
@@ -42,10 +42,10 @@ class _SearchScreenState extends State<SearchScreen> {
                         controller: _filter,
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: Colors.white12,
+                          fillColor: Colors.white,
                           prefixIcon: Icon(
                             Icons.search,
-                            color: Colors.white60,
+                            color: Colors.grey,
                             size: 20,
                           ),
                           suffixIcon: focusNode.hasFocus
@@ -65,15 +65,18 @@ class _SearchScreenState extends State<SearchScreen> {
                           hintText: 'Enter the Address',
                           labelStyle: TextStyle(color: Colors.white),
                           focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent),
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent),
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent),
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                         )))
