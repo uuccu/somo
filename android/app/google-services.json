@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1052084737726",
+    "firebase_url": "https://somo-406211-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "somo-406211",
     "storage_bucket": "somo-406211.appspot.com"
   },
@@ -12,7 +13,12 @@
           "package_name": "com.example.agile_frontend"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1052084737726-g0bkevrok2sd17mstje67rnam7k38jpg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCknnhDpcguvwt54FJZ1HGh90XZ9MJ30oc"
@@ -20,7 +26,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1052084737726-g0bkevrok2sd17mstje67rnam7k38jpg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1052084737726-a9hs2jpsqfvu2gg7b4c5r0lvor8vmfve.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.agileFrontend.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }

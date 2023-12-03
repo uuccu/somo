@@ -29,6 +29,11 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTGWswIfO4O1faP9nFJuwofB9SDneIFfw"></script>
+
+
+
   <title>agile_frontend</title>
   <link rel="manifest" href="manifest.json">
 
@@ -40,6 +45,30 @@
   <script src="flutter.js" defer></script>
 </head>
 <body>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+  <script>
+    var firebaseConfig = {
+    apiKey: "AIzaSyAHfaew4hQjsc-e3lfB34AaNnXoELNMrV8",
+    authDomain: "somo-406211.firebaseapp.com",
+    databaseURL: "https://somo-406211-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "somo-406211",
+    storageBucket: "somo-406211.appspot.com",
+    messagingSenderId: "1052084737726",
+    appId: "1:1052084737726:web:02fe331c1f00de4a74b0ef",
+    measurementId: "G-WWDHMNDXHK"
+  };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+<script src="main.dart.js" type="application/javascript"></script>
+
+
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
