@@ -44,7 +44,6 @@ class ButtonWidget extends StatelessWidget {
       ),
       onPressed: () {
         onPressed();
-        Get.offAll(() => onPressed());
       },
       child: Row(children: boxContents),
     );

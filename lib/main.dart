@@ -1,8 +1,9 @@
-import 'package:agile_frontend/firebase/firebase_options.dart';
 import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
+import 'package:agile_frontend/service/agent_data_provider_service.dart';
 import 'package:agile_frontend/service/house_data_provider_service.dart';
 import 'package:agile_frontend/util/db/firebase_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -15,9 +16,8 @@ import 'page/login_page.dart';
 void main() async {
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(
-        create: (context) => (HouseDataProviderService()),
-      ),
+      ChangeNotifierProvider(create: (context) => (HouseDataProviderService())),
+      ChangeNotifierProvider(create: (context) => (AgentDataProviderService())),
     ],
     child: const MyApp(),
   ));
@@ -43,20 +43,28 @@ class MyApp extends StatelessWidget {
           // if (userInfo != null) {
           //   return userInfo;
           // }
+          WidgetsFlutterBinding
+              .ensureInitialized(); // this line is upper than others
+          await Firebase.initializeApp();
 
-          WidgetsFlutterBinding.ensureInitialized();
-          await Firebase.initializeApp(
-            options: DefaultFirebaseOptions.currentPlatform,
-          );
+          InitFireStore initFireStore = InitFireStore();
+          final FirebaseFirestore firestore = FirebaseFirestore.instance;
+          QuerySnapshot querySnapshot =
+              await firestore.collection('agent').get();
+          if (querySnapshot.docs.isEmpty) {
+            await initFireStore.initData();
+          }
 
-          final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+          var houseDataProviderService =
+              context.read<HouseDataProviderService>();
+          var agentDataProviderService =
+              context.read<AgentDataProviderService>();
+          // var houseDataProviderService =
+          //     context.read<HouseDataProviderService>();
+          await houseDataProviderService.loadHouseData();
 
-          await _firestore.collection('agent').get().then((value) {
-            FirebaseFireStore().initData();
-          });
-          Duration duration = const Duration(seconds: 1);
+          await agentDataProviderService.loadAgentData();
 
-          await Future.delayed(duration);
           return "";
         }(),
         builder: (context, snapshot) {
