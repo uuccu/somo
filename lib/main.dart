@@ -1,10 +1,11 @@
+import 'package:agile_frontend/firebase_options.dart';
 import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
 import 'package:agile_frontend/service/agent_data_provider_service.dart';
 import 'package:agile_frontend/service/house_data_provider_service.dart';
 import 'package:agile_frontend/util/db/firebase_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -36,16 +37,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: FutureBuilder(
         future: () async {
-          // await initializeDateFormatting();
-          // await dotenv.load(fileName: 'asset/config/.env');
-          // var userInfoKey = dotenv.env['USER_INFO']!;
-          // var userInfo = await storage.read(key: userInfoKey);
-          // if (userInfo != null) {
-          //   return userInfo;
-          // }
           WidgetsFlutterBinding
               .ensureInitialized(); // this line is upper than others
-          await Firebase.initializeApp();
+
+          await Firebase.initializeApp(
+              // options: DefaultFirebaseOptions.currentPlatform,// if you want deploy to web, you should use this line
+              );
 
           InitFireStore initFireStore = InitFireStore();
           final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -59,8 +56,7 @@ class MyApp extends StatelessWidget {
               context.read<HouseDataProviderService>();
           var agentDataProviderService =
               context.read<AgentDataProviderService>();
-          // var houseDataProviderService =
-          //     context.read<HouseDataProviderService>();
+
           await houseDataProviderService.loadHouseData();
 
           await agentDataProviderService.loadAgentData();
