@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class InitFireStore {
@@ -26,7 +25,175 @@ class InitFireStore {
     return ref;
   }
 
-  Future<void> initData() async {
+  Future<void> initUserData() async {
+    List<String> imagePath = [
+      'asset/image/user/profile1.png',
+      'asset/image/user/profile2.png',
+      'asset/image/user/profile3.png',
+      'asset/image/user/profile4.png',
+      'asset/image/user/profile5.png',
+      'asset/image/user/profile6.png',
+      'asset/image/user/profile7.png',
+      'asset/image/user/profile8.png',
+      'asset/image/user/profile9.png',
+    ];
+
+    FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+      for (int i = 0; i < imagePath.length; i++) {
+        String ref = await uploadImage('user', imagePath[i]);
+        DocumentReference reference = _firestore.collection('user').doc();
+
+        transaction.set(reference, {
+          'id': '$i',
+          'gender': 'male',
+          'name': imagePath[i].split('/')[3].split('.')[0],
+          'email': 'asfasf@naver.com',
+          'phone':
+              '010-${Random().nextInt(8999) + 1000}-${Random().nextInt(8999) + 1000}',
+          'photoUrl': ref,
+          'age': '${Random().nextInt(100)}',
+          'job': 'student',
+          'preferenceArea1': 'Phnom Penh',
+          'preferenceArea2': 'Daun Penh',
+          'preferenceMinPrice': Random().nextInt(1000).toDouble(),
+          'preferenceMaxPrice': Random().nextInt(1000).toDouble() + 4000,
+          'preferenceSize': '33~66',
+          'trustedWeight': Random().nextInt(100).toDouble(),
+        });
+      }
+    });
+  }
+
+  Future<void> initAgentReviewData() async {
+    String id;
+    String agentId;
+    String userId;
+    String generalReview;
+    String satisfactionReview;
+    String dissatisfactionReview;
+    String type;
+    int agree;
+    int disagree;
+    double? propertyDiversityRating; // if type is owner than this is null
+    double?
+        informationAccessibilityRating; // if type is owner than this is null
+    double? customerServiceRating; // if type is owner than this is null
+    double? communicationRating; // if type is owner than this is null
+    double? facilitiesAndAmenitiesRating; // if type is owner than this is null
+
+    FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+      for (int i = 0; i < 9; i++) {
+        id = '$i';
+        agentId = '0';
+        userId = '$i';
+        generalReview =
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl.';
+        satisfactionReview =
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl.';
+        dissatisfactionReview =
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl.';
+        type = 'owner';
+        agree = Random().nextInt(100);
+        disagree = Random().nextInt(100);
+        propertyDiversityRating = Random().nextInt(100).toDouble();
+        informationAccessibilityRating = Random().nextInt(100).toDouble();
+        customerServiceRating = Random().nextInt(100).toDouble();
+        communicationRating = Random().nextInt(100).toDouble();
+        facilitiesAndAmenitiesRating = Random().nextInt(100).toDouble();
+
+        DocumentReference reference =
+            _firestore.collection('agent_review').doc();
+
+        transaction.set(reference, {
+          'id': id,
+          'agentId': agentId,
+          'userId': userId,
+          'generalReview': generalReview,
+          'satisfactionReview': satisfactionReview,
+          'dissatisfactionReview': dissatisfactionReview,
+          'type': type,
+          'agree': agree,
+          'disagree': disagree,
+        });
+
+        transaction.set(reference, {
+          'id': id,
+          'agentId': agentId,
+          'userId': userId,
+          'generalReview': generalReview,
+          'satisfactionReview': satisfactionReview,
+          'dissatisfactionReview': dissatisfactionReview,
+          'type': 'broker',
+          'agree': agree,
+          'disagree': disagree,
+          'propertyDiversityRating': propertyDiversityRating,
+          'informationAccessibilityRating': informationAccessibilityRating,
+          'customerServiceRating': customerServiceRating,
+          'communicationRating': communicationRating,
+          'facilitiesAndAmenitiesRating': facilitiesAndAmenitiesRating,
+        });
+      }
+    });
+  }
+
+  Future<void> initHouseReviewData() async {
+    String id;
+    String houseId;
+    String userId;
+    String generalReview;
+    String satisfactionReview;
+    String dissatisfactionReview;
+    int agree;
+    int disagree;
+    double indoorEnvironmentRating;
+    double outdoorEnvironmentRating;
+    double communicationWithLandlordRating;
+    double similarityToTheProvidedInfoRating;
+    double sunlightExposureRating;
+
+    FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+      for (int i = 0; i < 9; i++) {
+        id = '$i';
+        houseId = '0';
+        userId = '$i';
+        generalReview =
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl.';
+        satisfactionReview =
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl.';
+        dissatisfactionReview =
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl.';
+        agree = Random().nextInt(100);
+        disagree = Random().nextInt(100);
+        indoorEnvironmentRating = Random().nextInt(100).toDouble();
+        outdoorEnvironmentRating = Random().nextInt(100).toDouble();
+        communicationWithLandlordRating = Random().nextInt(100).toDouble();
+        similarityToTheProvidedInfoRating = Random().nextInt(100).toDouble();
+        sunlightExposureRating = Random().nextInt(100).toDouble();
+
+        DocumentReference reference =
+            _firestore.collection('house_review').doc();
+
+        transaction.set(reference, {
+          'id': id,
+          'houseId': houseId,
+          'userId': userId,
+          'generalReview': generalReview,
+          'satisfactionReview': satisfactionReview,
+          'dissatisfactionReview': dissatisfactionReview,
+          'agree': agree,
+          'disagree': disagree,
+          'indoorEnvironmentRating': indoorEnvironmentRating,
+          'outdoorEnvironmentRating': outdoorEnvironmentRating,
+          'communicationWithLandlordRating': communicationWithLandlordRating,
+          'similarityToTheProvidedInfoRating':
+              similarityToTheProvidedInfoRating,
+          'sunlightExposureRating': sunlightExposureRating,
+        });
+      }
+    });
+  }
+
+  Future<void> initAgentAndHouseData() async {
     List<String> imagePath = [
       'asset/image/agent_init_data/CHOLONGLEE.png',
       'asset/image/agent_init_data/HANDSOMEGUY.png',
@@ -95,61 +262,3 @@ class InitFireStore {
     });
   }
 }
-
-// class Agent {
-//   String id;
-//   String email;
-//   String name;
-//   String photoUrl;
-//   String role;
-//   String address;
-//   String phone;
-//   // sub collections Houseinformation
-//   House house;
-
-//   Agent({
-//     required this.id,
-//     required this.email,
-//     required this.name,
-//     required this.photoUrl,
-//     required this.role,
-//     required this.address,
-//     required this.phone,
-//     required this.house,
-//   });
-// }
-
-// class House {
-//   String id;
-//   String name;
-//   String imageUrl;
-//   String address;
-//   double size;
-//   String price;
-//   String floor;
-//   int room;
-//   int bathroom;
-//   String direction;
-//   int park;
-//   String occupancyDate;
-//   DateTime completionDate;
-//   String description;
-//   String rule;
-
-//   House(
-//       {required this.id,
-//       required this.name,
-//       required this.imageUrl,
-//       required this.address,
-//       required this.size,
-//       required this.price,
-//       required this.floor,
-//       required this.room,
-//       required this.bathroom,
-//       required this.direction,
-//       required this.park,
-//       required this.occupancyDate,
-//       required this.completionDate,
-//       required this.description,
-//       required this.rule});
-// }

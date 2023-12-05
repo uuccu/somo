@@ -1,7 +1,9 @@
-import 'package:agile_frontend/firebase_options.dart';
 import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
 import 'package:agile_frontend/service/agent_data_provider_service.dart';
+import 'package:agile_frontend/service/agent_data_review_provider_service.dart';
 import 'package:agile_frontend/service/house_data_provider_service.dart';
+import 'package:agile_frontend/service/house_review_data_provider_service.dart';
+import 'package:agile_frontend/service/user_data_provider_service.dart';
 import 'package:agile_frontend/util/db/firebase_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,6 +21,11 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (context) => (HouseDataProviderService())),
       ChangeNotifierProvider(create: (context) => (AgentDataProviderService())),
+      ChangeNotifierProvider(
+          create: (context) => (HouseReviewDataProviderService())),
+      ChangeNotifierProvider(
+          create: (context) => (AgentReviewDataProviderService())),
+      ChangeNotifierProvider(create: (context) => (UserDataProviderService())),
     ],
     child: const MyApp(),
   ));
@@ -49,7 +56,22 @@ class MyApp extends StatelessWidget {
           QuerySnapshot querySnapshot =
               await firestore.collection('agent').get();
           if (querySnapshot.docs.isEmpty) {
-            await initFireStore.initData();
+            await initFireStore.initAgentAndHouseData();
+          }
+
+          querySnapshot = await firestore.collection('user').get();
+          if (querySnapshot.docs.isEmpty) {
+            await initFireStore.initUserData();
+          }
+
+          querySnapshot = await firestore.collection('house_review').get();
+          if (querySnapshot.docs.isEmpty) {
+            await initFireStore.initHouseReviewData();
+          }
+
+          querySnapshot = await firestore.collection('agent_review').get();
+          if (querySnapshot.docs.isEmpty) {
+            await initFireStore.initAgentReviewData();
           }
 
           var houseDataProviderService =
@@ -57,9 +79,21 @@ class MyApp extends StatelessWidget {
           var agentDataProviderService =
               context.read<AgentDataProviderService>();
 
+          var houseReviewDataProviderService =
+              context.read<HouseReviewDataProviderService>();
+          var agentReviewDataProviderService =
+              context.read<AgentReviewDataProviderService>();
+          var userDataProviderService = context.read<UserDataProviderService>();
+
           await houseDataProviderService.loadHouseData();
 
           await agentDataProviderService.loadAgentData();
+
+          await houseReviewDataProviderService.loadHouseReviewData();
+
+          await agentReviewDataProviderService.loadAgentReviewData();
+
+          await userDataProviderService.loadUserData();
 
           return "";
         }(),
