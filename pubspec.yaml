@@ -54,9 +54,10 @@ dependencies:
     dart_jsonwebtoken: ^2.11.0
     flutter_native_splash: ^2.3.2
     google_maps_flutter: ^2.5.0
-    firebase_core:
-    firebase_auth:
-    cloud_firestore:
+    firebase_core: ^2.24.0
+    firebase_auth: ^4.15.0
+    cloud_firestore: ^4.13.3
+    firebase_storage: ^11.5.3
 
 
 dev_dependencies:
@@ -85,6 +86,9 @@ flutter:
         - asset/image/login_logo/
         - asset/image/home_page/
         - asset/font/
+        - asset/image/agent_init_data/
+        - asset/image/house/pic.png
+        - asset/image/user/
 
     fonts:
         - family: apple

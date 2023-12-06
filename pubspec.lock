@@ -249,6 +249,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.9.0"
+  firebase_storage:
+    dependency: "direct main"
+    description:
+      name: firebase_storage
+      sha256: ef1974043d48b0aa081ad055944ec74cad3a665545849cc6232f8ac1691fd901
+      url: "https://pub.dev"
+    source: hosted
+    version: "11.5.3"
+  firebase_storage_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_storage_platform_interface
+      sha256: "7b5aa0bf53de4a983aa3df57ab2bc0509d75fe2d269a0029a814aa84484798d5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.1.1"
+  firebase_storage_web:
+    dependency: transitive
+    description:
+      name: firebase_storage_web
+      sha256: bc5ede7fd6dfe7e23821cce007cd551cf77f47f44f8c3ea4f270dea0372051dc
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.6.15"
   fixnum:
     dependency: transitive
     description:
@@ -426,10 +450,8 @@ packages:
     description:
       name: intl
       sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
-      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.18.1"
     version: "0.18.1"
   js:
     dependency: transitive
@@ -460,10 +482,8 @@ packages:
     description:
       name: matcher
       sha256: "1803e76e6653768d64ed8ff2e1e67bea3ad4b923eb5c56a295c3e634bad5960e"
-      sha256: "1803e76e6653768d64ed8ff2e1e67bea3ad4b923eb5c56a295c3e634bad5960e"
       url: "https://pub.dev"
     source: hosted
-    version: "0.12.16"
     version: "0.12.16"
   material_color_utilities:
     dependency: transitive
@@ -722,10 +742,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: eb6ac1540b26de412b3403a163d919ba86f6a973fe6cc50ae3541b80092fdcfb
+      sha256: "5c2f730018264d276c20e4f1503fd1308dfbbae39ec8ee63c5236311ac06954b"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.1"
+    version: "0.6.1"
   tuple:
     dependency: "direct main"
     description:
@@ -799,5 +819,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.1.0-185.0.dev <4.0.0"
-  flutter: ">=3.10.0"
+  dart: ">=3.2.0 <4.0.0"
+  flutter: ">=3.16.0"

@@ -1,14 +1,34 @@
 import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
+import 'package:agile_frontend/service/agent_data_provider_service.dart';
+import 'package:agile_frontend/service/agent_data_review_provider_service.dart';
+import 'package:agile_frontend/service/house_data_provider_service.dart';
+import 'package:agile_frontend/service/house_review_data_provider_service.dart';
+import 'package:agile_frontend/service/user_data_provider_service.dart';
+import 'package:agile_frontend/util/db/firebase_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import 'page/intro_page.dart';
 import 'page/login_page.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => (HouseDataProviderService())),
+      ChangeNotifierProvider(create: (context) => (AgentDataProviderService())),
+      ChangeNotifierProvider(
+          create: (context) => (HouseReviewDataProviderService())),
+      ChangeNotifierProvider(
+          create: (context) => (AgentReviewDataProviderService())),
+      ChangeNotifierProvider(create: (context) => (UserDataProviderService())),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -24,27 +44,66 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: FutureBuilder(
         future: () async {
-          // await initializeDateFormatting();
-          // await dotenv.load(fileName: 'asset/config/.env');
-          // var userInfoKey = dotenv.env['USER_INFO']!;
-          // var userInfo = await storage.read(key: userInfoKey);
-          // if (userInfo != null) {
-          //   return userInfo;
-          // }
+          WidgetsFlutterBinding
+              .ensureInitialized(); // this line is upper than others
 
-          WidgetsFlutterBinding.ensureInitialized();
-          await Firebase.initializeApp();
+          await Firebase.initializeApp(
+              // options: DefaultFirebaseOptions.currentPlatform,// if you want deploy to web, you should use this line
+              );
 
-          Duration duration = const Duration(seconds: 1);
-          // await Future.delayed(duration, () {
-          //   Get.offAll(LoginPage());
-          // });
+          InitFireStore initFireStore = InitFireStore();
+          final FirebaseFirestore firestore = FirebaseFirestore.instance;
+          QuerySnapshot querySnapshot =
+              await firestore.collection('agent').get();
+          if (querySnapshot.docs.isEmpty) {
+            await initFireStore.initAgentAndHouseData();
+          }
+
+          querySnapshot = await firestore.collection('user').get();
+          if (querySnapshot.docs.isEmpty) {
+            await initFireStore.initUserData();
+          }
+
+          querySnapshot = await firestore.collection('house_review').get();
+          if (querySnapshot.docs.isEmpty) {
+            await initFireStore.initHouseReviewData();
+          }
+
+          querySnapshot = await firestore.collection('agent_review').get();
+          if (querySnapshot.docs.isEmpty) {
+            await initFireStore.initAgentReviewData();
+          }
+
+          var houseDataProviderService =
+              context.read<HouseDataProviderService>();
+          var agentDataProviderService =
+              context.read<AgentDataProviderService>();
+
+          var houseReviewDataProviderService =
+              context.read<HouseReviewDataProviderService>();
+          var agentReviewDataProviderService =
+              context.read<AgentReviewDataProviderService>();
+          var userDataProviderService = context.read<UserDataProviderService>();
+
+          await houseDataProviderService.loadHouseData();
+
+          await agentDataProviderService.loadAgentData();
+
+          await houseReviewDataProviderService.loadHouseReviewData();
+
+          await agentReviewDataProviderService.loadAgentReviewData();
+
+          await userDataProviderService.loadUserData();
+
           return "";
         }(),
         builder: (context, snapshot) {
+          if (snapshot.data == null) return const IntroPage();
+
           return AnimatedSwitcher(
-              duration: const Duration(milliseconds: 1000),
-              child: _splashLoadingWidget(snapshot));
+            duration: const Duration(milliseconds: 1000),
+            child: _splashLoadingWidget(snapshot),
+          );
         },
       ),
     );
