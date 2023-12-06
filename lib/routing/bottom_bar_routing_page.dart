@@ -1,5 +1,7 @@
 import 'package:agile_frontend/page/my_home_page.dart';
+import 'package:agile_frontend/service/bottom_bar_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BottomBarRoutingPage extends StatefulWidget {
   @override
@@ -8,6 +10,7 @@ class BottomBarRoutingPage extends StatefulWidget {
 
 class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
   int selectedIndex = 0;
+
   List<Widget> navBarPages = [
     const MyHomePage(),
     // const SavedPage(),
@@ -17,51 +20,71 @@ class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
     // const ProfilePage(),
   ];
 
+  void _onItemTapped(int index) {
+    Provider.of<BottomBarProvider>(context, listen: false).currentIndex = index;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: navBarPages[selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          // Lim Chae Yeong
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark),
-            label: 'Saved',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Add',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: 'Map',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.access_time_filled_sharp),
-            label: 'Community',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-            backgroundColor: Colors.black,
+    int selectedIndex = Provider.of<BottomBarProvider>(context).currentIndex;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.black,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 0,
+            blurRadius: 10,
+            offset: const Offset(0, 3), // changes position of shadow
           ),
         ],
+      ),
+      child: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          // Lim Chae Yeong
+          BottomNavigationBarItem(
+            icon: Image(image: AssetImage('asset/image/bottom_bar/home.png')),
+            activeIcon:
+                Image(image: AssetImage('asset/image/bottom_bar/home2.png')),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Image(image: AssetImage('asset/image/bottom_bar/saved.png')),
+            activeIcon:
+                Image(image: AssetImage('asset/image/bottom_bar/saved2.png')),
+            label: 'Saved',
+          ),
+          BottomNavigationBarItem(
+            icon:
+                Image(image: AssetImage('asset/image/bottom_bar/map_icon.png')),
+            activeIcon: Image(
+                image: AssetImage('asset/image/bottom_bar/map_icon2.png')),
+            label: 'Map',
+          ),
+          BottomNavigationBarItem(
+            icon: Image(
+                image: AssetImage('asset/image/bottom_bar/community_icon.png')),
+            activeIcon: Image(
+                image:
+                    AssetImage('asset/image/bottom_bar/community_icon2.png')),
+            label: 'Community',
+          ),
+          BottomNavigationBarItem(
+            icon:
+                Image(image: AssetImage('asset/image/bottom_bar/profile.png')),
+            activeIcon:
+                Image(image: AssetImage('asset/image/bottom_bar/profile2.png')),
+            label: 'Profile',
+          ),
+        ],
+        type: BottomNavigationBarType.fixed,
         currentIndex: selectedIndex,
         selectedItemColor: Colors.amber[800],
-        onTap: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
+        unselectedItemColor: Colors.black,
+        showUnselectedLabels: true,
+        backgroundColor: Colors.white,
+        onTap: _onItemTapped,
       ),
     );
   }

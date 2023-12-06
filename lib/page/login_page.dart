@@ -1,3 +1,4 @@
+import 'package:agile_frontend/page/my_home_page.dart';
 import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
 import 'package:agile_frontend/util/device/screen.dart';
 import 'package:flutter/material.dart';
@@ -38,28 +39,28 @@ class _LoginPageState extends State {
                 text: 'Login With Facebook',
                 imageUrl: 'asset/image/login_logo/facebook_logo.png',
                 onPressed: () {
-                  Get.to(() => BottomBarRoutingPage());
+                  Get.to(() => const MyHomePage());
                 },
               ),
               LoginButtonWidget(
                 text: 'Login With Apple',
                 imageUrl: 'asset/image/login_logo/apple_logo.png',
                 onPressed: () {
-                  Get.to(() => BottomBarRoutingPage());
+                  Get.to(() => const MyHomePage());
                 },
               ),
               LoginButtonWidget(
                 text: 'Login With Google',
                 imageUrl: 'asset/image/login_logo/google_logo.png',
                 onPressed: () {
-                  Get.to(() => BottomBarRoutingPage());
+                  Get.to(() => const MyHomePage());
                 },
               ),
               LoginButtonWidget(
                 text: 'Browse without Login',
                 imageUrl: null,
                 onPressed: () {
-                  Get.to(() => BottomBarRoutingPage());
+                  Get.to(() => const MyHomePage());
                 },
               ),
               Row(

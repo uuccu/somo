@@ -1,3 +1,4 @@
+import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
 import 'package:agile_frontend/service/house_data_provider_service.dart';
 import 'package:agile_frontend/util/db/entity/house.dart';
 import 'package:agile_frontend/util/db/firebase_storage.dart';
@@ -17,25 +18,28 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(
-      children: [
-        _buildHeader(context),
-        _buildHouseBoxWidgets(),
-        Padding(
-            padding:
-                EdgeInsets.only(top: Screen.designToScreenHeight(context, 11))),
-        _buildOutlinedButton(),
-        Padding(
-            padding:
-                EdgeInsets.only(top: Screen.designToScreenHeight(context, 18))),
-        _buildRecommendationText(),
-        Padding(
-            padding:
-                EdgeInsets.only(top: Screen.designToScreenHeight(context, 15))),
-        _buildHouseList(),
-      ],
-    ));
+    return Scaffold(
+      body: SingleChildScrollView(
+          child: Column(
+        children: [
+          _buildHeader(context),
+          _buildHouseBoxWidgets(),
+          Padding(
+              padding: EdgeInsets.only(
+                  top: Screen.designToScreenHeight(context, 11))),
+          _buildOutlinedButton(),
+          Padding(
+              padding: EdgeInsets.only(
+                  top: Screen.designToScreenHeight(context, 18))),
+          _buildRecommendationText(),
+          Padding(
+              padding: EdgeInsets.only(
+                  top: Screen.designToScreenHeight(context, 15))),
+          _buildHouseList(),
+        ],
+      )),
+      bottomNavigationBar: BottomBarRoutingPage(),
+    );
   }
 
   Widget _buildHeader(BuildContext context) {

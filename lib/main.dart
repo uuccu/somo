@@ -1,7 +1,8 @@
 import 'package:agile_frontend/page/home_information.dart';
-import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
+import 'package:agile_frontend/page/my_home_page.dart';
 import 'package:agile_frontend/service/agent_data_provider_service.dart';
 import 'package:agile_frontend/service/agent_data_review_provider_service.dart';
+import 'package:agile_frontend/service/bottom_bar_provider.dart';
 import 'package:agile_frontend/service/house_data_provider_service.dart';
 import 'package:agile_frontend/service/house_review_data_provider_service.dart';
 import 'package:agile_frontend/service/user_data_provider_service.dart';
@@ -15,7 +16,6 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import 'page/intro_page.dart';
-import 'page/login_page.dart';
 
 void main() async {
   runApp(MultiProvider(
@@ -27,6 +27,7 @@ void main() async {
       ChangeNotifierProvider(
           create: (context) => (AgentReviewDataProviderService())),
       ChangeNotifierProvider(create: (context) => (UserDataProviderService())),
+      ChangeNotifierProvider(create: (context) => (BottomBarProvider())),
     ],
     child: const MyApp(),
   ));
@@ -118,7 +119,7 @@ Widget _splashLoadingWidget(AsyncSnapshot snapshot) {
     var userInfo = snapshot.data;
     if (userInfo != "") {
       // already logged in (token exists)
-      return BottomBarRoutingPage();
+      return const MyHomePage();
     } else {
       // not logged in (token does not exist)
       return HomeInformation();
