@@ -9,11 +9,8 @@ class BottomBarRoutingPage extends StatefulWidget {
 }
 
 class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
-  int selectedIndex = 0;
-
   List<Widget> navBarPages = [
     const MyHomePage(),
-    // const SavedPage(),
     // const Text('add'),
     // const MapPage(),
     // const CommunityPage(),
@@ -85,6 +82,7 @@ class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
         showUnselectedLabels: true,
         backgroundColor: Colors.white,
         onTap: _onItemTapped,
+
       ),
     );
   }

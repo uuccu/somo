@@ -90,6 +90,7 @@ flutter:
         - asset/image/house/pic.png
         - asset/image/user/
         - asset/image/house_info/
+        - asset/image/bottom_bar/
 
     fonts:
         - family: apple
