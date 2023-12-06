@@ -1,3 +1,4 @@
+import 'package:agile_frontend/page/home_information.dart';
 import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
 import 'package:agile_frontend/service/agent_data_provider_service.dart';
 import 'package:agile_frontend/service/agent_data_review_provider_service.dart';
@@ -120,7 +121,7 @@ Widget _splashLoadingWidget(AsyncSnapshot snapshot) {
       return BottomBarRoutingPage();
     } else {
       // not logged in (token does not exist)
-      return LoginPage();
+      return HomeInformation();
     }
   } else {
     // loading
