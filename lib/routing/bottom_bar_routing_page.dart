@@ -1,6 +1,9 @@
 import 'package:agile_frontend/page/my_home_page.dart';
 import 'package:agile_frontend/service/bottom_bar_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 class BottomBarRoutingPage extends StatefulWidget {
@@ -19,6 +22,7 @@ class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
 
   void _onItemTapped(int index) {
     Provider.of<BottomBarProvider>(context, listen: false).currentIndex = index;
+    Get.offAll(navBarPages[index]);
   }
 
   @override
@@ -82,7 +86,6 @@ class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
         showUnselectedLabels: true,
         backgroundColor: Colors.white,
         onTap: _onItemTapped,
-
       ),
     );
   }

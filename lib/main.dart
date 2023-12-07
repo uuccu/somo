@@ -1,4 +1,6 @@
+import 'package:agile_frontend/firebase_options.dart';
 import 'package:agile_frontend/page/home_information.dart';
+import 'package:agile_frontend/page/login_page.dart';
 import 'package:agile_frontend/page/my_home_page.dart';
 import 'package:agile_frontend/service/agent_data_provider_service.dart';
 import 'package:agile_frontend/service/agent_data_review_provider_service.dart';
@@ -50,7 +52,8 @@ class MyApp extends StatelessWidget {
               .ensureInitialized(); // this line is upper than others
 
           await Firebase.initializeApp(
-              // options: DefaultFirebaseOptions.currentPlatform,// if you want deploy to web, you should use this line
+              // options: DefaultFirebaseOptions
+              //     .currentPlatform, // if you want deploy to web, you should use this line
               );
 
           InitFireStore initFireStore = InitFireStore();
@@ -87,16 +90,20 @@ class MyApp extends StatelessWidget {
               context.read<AgentReviewDataProviderService>();
           var userDataProviderService = context.read<UserDataProviderService>();
 
-          await houseDataProviderService.loadHouseData();
+          if (houseDataProviderService.houses.isEmpty)
+            await houseDataProviderService.loadHouseData();
 
-          await agentDataProviderService.loadAgentData();
+          if (agentDataProviderService.agents.isEmpty)
+            await agentDataProviderService.loadAgentData();
 
-          await houseReviewDataProviderService.loadHouseReviewData();
+          if (houseReviewDataProviderService.houseReviews.isEmpty)
+            await houseReviewDataProviderService.loadHouseReviewData();
 
-          await agentReviewDataProviderService.loadAgentReviewData();
+          if (agentReviewDataProviderService.agentReviews.isEmpty)
+            await agentReviewDataProviderService.loadAgentReviewData();
 
-          await userDataProviderService.loadUserData();
-
+          if (userDataProviderService.users.isEmpty)
+            await userDataProviderService.loadUserData();
           return "";
         }(),
         builder: (context, snapshot) {
@@ -122,7 +129,7 @@ Widget _splashLoadingWidget(AsyncSnapshot snapshot) {
       return const MyHomePage();
     } else {
       // not logged in (token does not exist)
-      return HomeInformation();
+      return LoginPage();
     }
   } else {
     // loading
