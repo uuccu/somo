@@ -237,7 +237,7 @@ class InitFireStore {
             houseReference,
             {
               'id': '$j',
-              'agentId': reference.id,
+              'agentId': '$i',
               'name': 'House ${Random().nextInt(1000)}',
               'type': houseType[j],
               'imageUrl': houseRef,
