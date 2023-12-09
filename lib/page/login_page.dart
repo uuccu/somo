@@ -39,28 +39,28 @@ class _LoginPageState extends State {
                 text: 'Login With Facebook',
                 imageUrl: 'asset/image/login_logo/facebook_logo.png',
                 onPressed: () {
-                  Get.to(() => const MyHomePage());
+                  Get.to(const MyHomePage());
                 },
               ),
               LoginButtonWidget(
                 text: 'Login With Apple',
                 imageUrl: 'asset/image/login_logo/apple_logo.png',
                 onPressed: () {
-                  Get.to(() => const MyHomePage());
+                  Get.to(const MyHomePage());
                 },
               ),
               LoginButtonWidget(
                 text: 'Login With Google',
                 imageUrl: 'asset/image/login_logo/google_logo.png',
                 onPressed: () {
-                  Get.to(() => const MyHomePage());
+                  Get.to(const MyHomePage());
                 },
               ),
               LoginButtonWidget(
                 text: 'Browse without Login',
                 imageUrl: null,
                 onPressed: () {
-                  Get.to(() => const MyHomePage());
+                  Get.to(const MyHomePage());
                 },
               ),
               Row(

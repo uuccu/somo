@@ -18,6 +18,7 @@ class House {
   DateTime completionDate;
   String description;
   String rule;
+  GeoPoint location;
 
   House({
     required this.id,
@@ -37,6 +38,7 @@ class House {
     required this.completionDate,
     required this.description,
     required this.rule,
+    required this.location,
   });
 
   factory House.fromJson(Map<String, dynamic> json) {
@@ -58,6 +60,7 @@ class House {
       completionDate: json['completionDate'],
       description: json['description'],
       rule: json['rule'],
+      location: json['location'],
     );
   }
 
@@ -79,6 +82,7 @@ class House {
         'completionDate': completionDate,
         'description': description,
         'rule': rule,
+        'location': location,
       };
 
   factory House.fromDocumentSnapshot(DocumentSnapshot documentSnapshot) =>
@@ -101,5 +105,6 @@ class House {
             (documentSnapshot['completionDate'] as Timestamp).toDate(),
         description: documentSnapshot['description'],
         rule: documentSnapshot['rule'],
+        location: documentSnapshot['location'],
       );
 }

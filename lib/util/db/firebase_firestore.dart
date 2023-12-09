@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class InitFireStore {
   late final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -229,34 +230,48 @@ class InitFireStore {
           'Multiplex'
         ];
 
-        for (int j = 0; j < 4; j++) {
+        for (int j = 0; j < 8; j++) {
           DocumentReference houseReference =
               _firestore.collection('house').doc();
+          int id = j + i * 8;
 
-          transaction.set(
-            houseReference,
-            {
-              'id': '$j',
-              'agentId': '$i',
-              'name': 'House ${Random().nextInt(1000)}',
-              'type': houseType[j],
-              'imageUrl': houseRef,
-              'address': 'Phnom Penh',
-              'size': Random().nextInt(1000).toDouble(),
-              'price': '${Random().nextInt(1000)}\$',
-              'floor': '${Random().nextInt(100)}',
-              'room': Random().nextInt(10),
-              'bathroom': Random().nextInt(10),
-              'direction': 'North',
-              'park': Random().nextInt(10),
-              'occupancyDate': 'immediate occupancy',
-              'completionDate': DateTime.now(),
-              'description':
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl.',
-              'rule':
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl.',
-            },
-          );
+          double latitudeDiff = 11.588439 - 11.544476;
+          double longitudeDiff = 104.913508 - 104.868415;
+
+          double latitude = 11.544476 + Random().nextDouble() * latitudeDiff;
+          double longitude = 104.868415 + Random().nextDouble() * longitudeDiff;
+          try {
+            transaction.set(
+              houseReference,
+              {
+                'id': id.toString(),
+                'agentId': '$i',
+                'name': 'House ${Random().nextInt(1000)}',
+                'type': houseType[j % 4],
+                'imageUrl': houseRef,
+                'address': 'Phnom Penh',
+                'size': Random().nextInt(100).toDouble() + 20,
+                'price': '${Random().nextInt(300)}\$',
+                'floor': '${Random().nextInt(5)}',
+                'room': Random().nextInt(5),
+                'bathroom': Random().nextInt(5),
+                'direction': 'North',
+                'park': Random().nextInt(10),
+                'occupancyDate': 'immediate occupancy',
+                'completionDate': Timestamp.now(),
+                'description':
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl.',
+                'rule':
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl.',
+                'location': GeoPoint(
+                  latitude,
+                  longitude,
+                ),
+              },
+            );
+          } catch (e) {
+            print(e);
+          }
         }
       }
     });

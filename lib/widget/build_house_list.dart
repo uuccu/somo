@@ -1,8 +1,11 @@
+import 'package:agile_frontend/page/home_information.dart';
 import 'package:agile_frontend/service/house_data_provider_service.dart';
 import 'package:agile_frontend/util/db/entity/house.dart';
 import 'package:agile_frontend/util/db/firebase_storage.dart';
 import 'package:agile_frontend/util/device/screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 
 class BuildHouseList extends StatefulWidget {
@@ -55,56 +58,65 @@ class _BuildHouseListState extends State<BuildHouseList> {
   Widget _buildHouseImageWithText(
       BuildContext context, House house, String imageUrl) {
     return Padding(
-      padding: EdgeInsets.only(right: Screen.designToScreenWidth(context, 13)),
-      child: Stack(
-        children: [
-          Container(
-            width: Screen.designToScreenWidth(context, 177),
-            height: Screen.designToScreenHeight(context, 249.4),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              image: DecorationImage(
-                image: NetworkImage(imageUrl),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Color.fromRGBO(14, 49, 70, 1),
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    bottomRight: Radius.circular(15)), // 원하는 반지름 값 설정
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    house.name,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+        padding:
+            EdgeInsets.only(right: Screen.designToScreenWidth(context, 13)),
+        child: GestureDetector(
+          onTap: () {
+            Provider.of<HouseDataProviderService>(context, listen: false)
+                .changeHomeInformationIndex(int.parse(house.id));
+            Get.to(
+              () => const HomeInformation(),
+            );
+          },
+          child: Stack(
+            children: [
+              Container(
+                width: Screen.designToScreenWidth(context, 177),
+                height: Screen.designToScreenHeight(context, 249.4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  image: DecorationImage(
+                    image: NetworkImage(imageUrl),
+                    fit: BoxFit.cover,
                   ),
-                  Text(
-                    house.address,
-                    style: const TextStyle(
-                      // todo
-                      color: Colors.white,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Color.fromRGBO(14, 49, 70, 1),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        house.name,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        house.address,
+                        style: const TextStyle(
+                          // todo
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 }
