@@ -1,3 +1,4 @@
+import 'package:agile_frontend/page/google_map_page.dart';
 import 'package:agile_frontend/page/my_home_page.dart';
 import 'package:agile_frontend/service/bottom_bar_provider.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,9 @@ class BottomBarRoutingPage extends StatefulWidget {
 class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
   List<Widget> navBarPages = [
     const MyHomePage(),
-    // const Text('add'),
-    // const MapPage(),
+    const MyHomePage(),
+    GoogleMapPage(),
+
     // const CommunityPage(),
     // const ProfilePage(),
   ];
