@@ -30,7 +30,7 @@ class _BuildHouseListState extends State<BuildHouseList> {
           scrollDirection: Axis.horizontal,
           padding:
               EdgeInsets.only(left: Screen.designToScreenWidth(context, 20)),
-          children: houseData.houses
+          children: houseData.houses.values
               .map((house) => _buildHouseItem(context, house))
               .toList(),
         ),
