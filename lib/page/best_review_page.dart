@@ -1,3 +1,4 @@
+import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
 import 'package:agile_frontend/service/house_data_provider_service.dart';
 import 'package:agile_frontend/service/house_review_data_provider_service.dart';
 import 'package:agile_frontend/util/db/entity/house.dart';
@@ -152,6 +153,7 @@ class BestReviewPage extends StatelessWidget {
           ],
         );
       }),
+      bottomNavigationBar: BottomBarRoutingPage(),
     );
   }
 }

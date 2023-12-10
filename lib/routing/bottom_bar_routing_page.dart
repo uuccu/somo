@@ -1,3 +1,4 @@
+import 'package:agile_frontend/page/SavedPage.dart';
 import 'package:agile_frontend/page/google_map_page.dart';
 import 'package:agile_frontend/page/my_home_page.dart';
 import 'package:agile_frontend/service/bottom_bar_provider.dart';
@@ -15,7 +16,7 @@ class BottomBarRoutingPage extends StatefulWidget {
 class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
   List<Widget> navBarPages = [
     const MyHomePage(),
-    const MyHomePage(),
+    const SavedPage(),
     GoogleMapPage(),
 
     // const CommunityPage(),

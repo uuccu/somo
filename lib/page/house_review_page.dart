@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
 import 'package:agile_frontend/service/house_data_provider_service.dart';
 import 'package:agile_frontend/service/house_review_data_provider_service.dart';
 import 'package:agile_frontend/util/db/entity/house.dart';
@@ -20,106 +21,109 @@ import 'package:provider/provider.dart';
 class HouseReviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: SingleChildScrollView(
-      child: Consumer<HouseDataProviderService>(
-          builder: (context, houseData, child) {
-        int index = houseData.homeInformationIndex;
-        House house = houseData.houses[index.toString()]!;
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Consumer<HouseDataProviderService>(
+            builder: (context, houseData, child) {
+          int index = houseData.homeInformationIndex;
+          House house = houseData.houses[index.toString()]!;
 
-        return Column(
-          children: <Widget>[
-            HouseImageWidget(house: house),
+          return Column(
+            children: <Widget>[
+              HouseImageWidget(house: house),
 
-            Container(
-              padding: EdgeInsets.only(
+              Container(
+                padding: EdgeInsets.only(
+                    left: Screen.designToScreenWidth(context, 20),
+                    top: Screen.designToScreenHeight(context, 14)),
+                alignment: Alignment.topLeft,
+                child: HomeNoBox(
+                  house: house,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
                   left: Screen.designToScreenWidth(context, 20),
-                  top: Screen.designToScreenHeight(context, 14)),
-              alignment: Alignment.topLeft,
-              child: HomeNoBox(
-                house: house,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: Screen.designToScreenWidth(context, 20),
-                bottom: Screen.designToScreenHeight(context, 14),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  bottom: Screen.designToScreenHeight(context, 14),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            house.name,
+                            style: TextStyle(
+                              fontSize: 24,
+                            ),
+                          ),
+                          Text(
+                            'located in Phnom penh',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.grey[500],
+                            ),
+                          ),
+                          SizedBox(height: 10), // Space between text and icons
+                          Row(
+                            children: [
+                              Icon(Icons.home, color: Colors.orange),
+                              SizedBox(width: 4), // Space between icon and text
+                              Text(house.type),
+                              SizedBox(width: 16), // Space between items
+                              Icon(Icons.filter_none, color: Colors.orange),
+                              SizedBox(width: 4), // Space between icon and text
+                              Text('${house.floor} floor in total'),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Stack(
+                      alignment: Alignment.center,
                       children: [
-                        Text(
-                          house.name,
-                          style: TextStyle(
-                            fontSize: 24,
-                          ),
+                        CustomPaint(
+                          size: Size(Screen.designToScreenWidth(context, 70),
+                              Screen.designToScreenHeight(context, 70)),
+                          painter: HeartPainter(),
                         ),
-                        Text(
-                          'located in Phnom penh',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.grey[500],
-                          ),
-                        ),
-                        SizedBox(height: 10), // Space between text and icons
-                        Row(
-                          children: [
-                            Icon(Icons.home, color: Colors.orange),
-                            SizedBox(width: 4), // Space between icon and text
-                            Text(house.type),
-                            SizedBox(width: 16), // Space between items
-                            Icon(Icons.filter_none, color: Colors.orange),
-                            SizedBox(width: 4), // Space between icon and text
-                            Text('${house.floor} floor in total'),
-                          ],
+                        const Text(
+                          '\nlike\n14',
+                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),
-                  ),
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      CustomPaint(
-                        size: Size(Screen.designToScreenWidth(context, 70),
-                            Screen.designToScreenHeight(context, 70)),
-                        painter: HeartPainter(),
-                      ),
-                      const Text(
-                        '\nlike\n14',
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
 
-            Container(
-              width: Screen.designToScreenWidth(context, 445),
-              height: Screen.designToScreenHeight(context, 10),
-              color: Colors.grey[200],
-              padding: EdgeInsets.only(
-                bottom: Screen.designToScreenHeight(context, 8),
+              Container(
+                width: Screen.designToScreenWidth(context, 445),
+                height: Screen.designToScreenHeight(context, 10),
+                color: Colors.grey[200],
+                padding: EdgeInsets.only(
+                  bottom: Screen.designToScreenHeight(context, 8),
+                ),
               ),
-            ),
 
-            ReviewSection(house: house),
-            SizedBox(height: Screen.designToScreenHeight(context, 3)),
-            Line(
-                context: context,
-                width: Screen.designToScreenWidth(context, 390)),
-            BestReviewSection(
-              house: house,
-            ),
-            // Add more widgets as needed for your layout
-          ],
-        );
-      }),
-    ));
+              ReviewSection(house: house),
+              SizedBox(height: Screen.designToScreenHeight(context, 3)),
+              Line(
+                  context: context,
+                  width: Screen.designToScreenWidth(context, 390)),
+              BestReviewSection(
+                house: house,
+              ),
+              // Add more widgets as needed for your layout
+            ],
+          );
+        }),
+      ),
+      bottomNavigationBar: BottomBarRoutingPage(),
+    );
   }
 }
 

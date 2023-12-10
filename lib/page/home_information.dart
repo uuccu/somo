@@ -128,14 +128,28 @@ class _HomeInformationState extends State<HomeInformation> {
               Padding(
                   padding: EdgeInsets.only(
                       top: Screen.designToScreenHeight(context, 16))),
-              Container(
-                padding: EdgeInsets.only(
-                    left: Screen.designToScreenWidth(context, 20)),
-                alignment: Alignment.centerLeft,
-                child: const Text("Detailed Information",
-                    style: TextStyle(
-                      fontSize: 20,
-                    )),
+              Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(
+                        left: Screen.designToScreenWidth(context, 20)),
+                    alignment: Alignment.centerLeft,
+                    child: const Text("Detailed Information",
+                        style: TextStyle(
+                          fontSize: 20,
+                        )),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(HouseReviewPage());
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: Screen.designToScreenWidth(context, 200)),
+                      child: const Icon(Icons.arrow_forward_ios),
+                    ),
+                  )
+                ],
               ),
               Padding(
                   padding: EdgeInsets.only(
@@ -309,12 +323,19 @@ class _HomeInformationState extends State<HomeInformation> {
                                       style: const TextStyle(
                                           fontSize: 33, color: Colors.orange)),
                               TextButton(
-                                  onPressed: () {
-                                    // todo review page routing
-                                  },
-                                  child: Text("$length reviews  >",
-                                      style: const TextStyle(
-                                          fontSize: 15, color: Colors.black))),
+                                onPressed: () {
+                                  // todo
+                                  agent.role == 'owner'
+                                      ? Get.toNamed('/house_review',
+                                          arguments: agent.id)
+                                      : Get.toNamed('/agent_review',
+                                          arguments: agent.id);
+                                  // todo review page routing
+                                },
+                                child: Text("$length reviews  >",
+                                    style: const TextStyle(
+                                        fontSize: 15, color: Colors.black)),
+                              )
                             ],
                           );
                         }),
