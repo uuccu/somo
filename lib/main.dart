@@ -1,4 +1,5 @@
 import 'package:agile_frontend/firebase_options.dart';
+import 'package:agile_frontend/page/finding_roommate/finding_roommate_condition.dart';
 import 'package:agile_frontend/page/home_information.dart';
 import 'package:agile_frontend/page/login_page.dart';
 import 'package:agile_frontend/page/my_home_page.dart';
