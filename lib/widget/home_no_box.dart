@@ -25,7 +25,7 @@ class HomeNoBox extends StatelessWidget {
         child: Text(
           // todo home review page routing
           "home no. ${house.completionDate}",
-          style: const TextStyle(fontSize: 7.5),
+          style: const TextStyle(fontSize: 6.5),
           textAlign: TextAlign.center,
         ),
       ),
