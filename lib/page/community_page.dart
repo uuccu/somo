@@ -115,7 +115,7 @@ class BulletinBoard extends StatelessWidget {
             ),
           ),
           PostBulletinBoard(
-            avatar: 'lib/images/pfp1.jpg', // replace with your asset image
+            avatar: 'asset/image/user/pfp1.jpg', // replace with your asset image
             username: 'lovely_fresher',
             grade: '3rd grade | students',
             date: '2023.11.16.',
@@ -123,7 +123,7 @@ class BulletinBoard extends StatelessWidget {
             content: 'I got scammed at the agency in front of the school i trusted it but the agency is ...',
           ),
           PostBulletinBoard(
-            avatar: 'lib/images/pfp4.jpg', // replace with your asset image
+            avatar: 'asset/image/user/pfp4.jpg', // replace with your asset image
             username: 'agile_win',
             grade: '2nd grade | students',
             date: '2023.11.14.',
@@ -248,9 +248,9 @@ class HomeRating extends StatelessWidget {
             ),
           ),
           PostHomeRating(
-            photo: 'lib/images/house1.jpg',
+            photo: 'asset/image/house/house1.jpg',
             address: '206 Street 06, Phnom Penh',
-            avatar: 'lib/images/pfp3.png', // replace with your asset image
+            avatar: 'asset/image/user/pfp3.png', // replace with your asset image
             username: 'homie',
             grade: '4th grade | students',
             date: '2023.09.02.',
@@ -422,9 +422,9 @@ class FindingMate extends StatelessWidget {
             ),
           ),
           PostFindingMate(
-            photo: 'lib/images/house2.jpg',
+            photo: 'asset/image/house/house2.jpg',
             address: '206 Street 06, Phnom Penh',
-            avatar: 'lib/images/pfp5.jpg', // replace with your asset image
+            avatar: 'asset/image/user/pfp5.jpg', // replace with your asset image
             username: 'bts_lover',
             grade: '1st grade | students',
             date: '2023.10.02.',
