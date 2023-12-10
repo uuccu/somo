@@ -9,7 +9,7 @@ class HouseDataProviderService extends ChangeNotifier {
   int _homeInformationIndex = 0;
   int get homeInformationIndex => _homeInformationIndex;
 
-  List<House> houses = [];
+  Map<String, House> houses = {};
 
   HouseDataProviderService();
 
@@ -22,7 +22,7 @@ class HouseDataProviderService extends ChangeNotifier {
     QuerySnapshot querySnapshot = await _firestore.collection('house').get();
     for (var doc in querySnapshot.docs) {
       House house = House.fromDocumentSnapshot(doc);
-      houses.add(house);
+      houses[house.id] = house;
     }
     notifyListeners();
   }

@@ -6,7 +6,27 @@ class HouseReviewDataProviderService extends ChangeNotifier {
   late final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   List<HouseReview> houseReviews = [];
 
+  String houseIdWithBestReview = '';
+
+  void setHouseIdWithBestReview(String houseId) {
+    houseIdWithBestReview = houseId;
+    notifyListeners();
+  }
+
   HouseReviewDataProviderService();
+
+  List<HouseReview> getHouseReviewsByHouseIdOrderByAgree(String houseId) {
+    List<HouseReview> houseReviewsByHouseId = [];
+    for (var houseReview in houseReviews) {
+      if (houseReview.houseId == houseId) {
+        houseReviewsByHouseId.add(houseReview);
+      }
+    }
+    houseReviewsByHouseId
+        .sort((a, b) => b.agree.compareTo(a.agree - a.disagree));
+
+    return houseReviews;
+  }
 
   Future<void> loadHouseReviewData() async {
     QuerySnapshot querySnapshot =
