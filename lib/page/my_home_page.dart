@@ -4,6 +4,7 @@ import 'package:agile_frontend/util/db/entity/house.dart';
 import 'package:agile_frontend/util/db/firebase_storage.dart';
 import 'package:agile_frontend/widget/build_house_list.dart';
 import 'package:agile_frontend/widget/house_box_widget.dart';
+import 'package:agile_frontend/widget/search_box.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +25,10 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
         children: [
           _buildHeader(context),
+          SearchScreen(),
+          Padding(
+              padding: EdgeInsets.only(
+                  top: Screen.designToScreenHeight(context, 26))),
           _buildHouseBoxWidgets(),
           Padding(
               padding: EdgeInsets.only(
@@ -58,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.bold,
             fontFamily: 'hgg',
-            fontSize: 60,
+            fontSize: 45,
           ),
         ),
       ),
