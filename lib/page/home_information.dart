@@ -385,7 +385,15 @@ class _HomeInformationState extends State<HomeInformation> {
                             padding: EdgeInsets.only(
                                 left: Screen.designToScreenWidth(context, 20))),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            final url = Uri.parse('sms:${agent.phone}');
+                            if (await canLaunchUrl(url)) {
+                              launchUrl(url);
+                            } else {
+                              // ignore: avoid_print
+                              print("Can't launch $url");
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                             fixedSize: Size(
                                 Screen.designToScreenWidth(context, 225),
@@ -400,21 +408,14 @@ class _HomeInformationState extends State<HomeInformation> {
                               borderRadius: BorderRadius.circular(5),
                             ),
                           ),
-                          child: Text("Phone ${agent.phone}"),
+                          child: Text("Phone ${agent.phone}",
+                              style: const TextStyle(fontSize: 12)),
                         ),
                         Padding(
                             padding: EdgeInsets.only(
                                 left: Screen.designToScreenWidth(context, 10))),
                         ElevatedButton(
-                          onPressed: () async {
-                            final url = Uri.parse('sms:${agent.phone}');
-                            if (await canLaunchUrl(url)) {
-                              launchUrl(url);
-                            } else {
-                              // ignore: avoid_print
-                              print("Can't launch $url");
-                            }
-                          },
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             fixedSize: Size(
                                 Screen.designToScreenWidth(context, 155),
@@ -429,7 +430,8 @@ class _HomeInformationState extends State<HomeInformation> {
                               borderRadius: BorderRadius.circular(5),
                             ),
                           ),
-                          child: const Text("Direct Message"), // todo direct
+                          child: const Text("Direct Message",
+                              style: TextStyle(fontSize: 12)), // todo direct
                         ),
                       ],
                     ),
