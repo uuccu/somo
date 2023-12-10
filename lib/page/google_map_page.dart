@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:agile_frontend/page/home_information.dart';
-import 'package:agile_frontend/page/place_model.dart';
 import 'package:agile_frontend/routing/bottom_bar_routing_page.dart';
 import 'package:agile_frontend/service/house_data_provider_service.dart';
 import 'package:agile_frontend/util/db/firebase_storage.dart';
 import 'package:agile_frontend/util/device/screen.dart';
+import 'package:agile_frontend/widget/place_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,10 +27,10 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
 
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(11.567975, 104.890669),
-    zoom: 12.4746,
+    zoom: 15.4746,
   );
 
-  double _zoom = 14.4746;
+  double _zoom = 15.4746;
   Set<Marker> markers = <Marker>{};
   bool _showPanel = false;
   Widget _panel = const SizedBox();
@@ -45,7 +45,7 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
         Provider.of<HouseDataProviderService>(context, listen: false);
 
     if (placeList.isEmpty) {
-      for (var house in houseData.houses) {
+      for (var house in houseData.houses.values) {
         placeList.add(
           PlaceModel(
             id: house.id,

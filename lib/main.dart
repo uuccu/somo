@@ -52,9 +52,9 @@ class MyApp extends StatelessWidget {
               .ensureInitialized(); // this line is upper than others
 
           await Firebase.initializeApp(
-            options: DefaultFirebaseOptions
-                .currentPlatform, // if you want deploy to web, you should use this line
-          );
+              // options: DefaultFirebaseOptions
+              //     .currentPlatform, // if you want deploy to web, you should use this line
+              );
 
           InitFireStore initFireStore = InitFireStore();
           final FirebaseFirestore firestore = FirebaseFirestore.instance;

@@ -95,6 +95,7 @@ flutter:
         - asset/image/user/
         - asset/image/house_info/
         - asset/image/bottom_bar/
+        - asset/image/house/
 
 
     fonts:
