@@ -99,7 +99,7 @@ class FindingRoommateConditionPage4 extends StatelessWidget {
                         MaterialStateProperty.all<Color>(Colors.white),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(8),
                     )),
                   ),
                   child: const Text("Skip"),
@@ -126,7 +126,7 @@ class FindingRoommateConditionPage4 extends StatelessWidget {
                         const Color.fromRGBO(254, 142, 72, 1)),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(8),
                     )),
                   ),
                   child: Text("Next"),

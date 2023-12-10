@@ -1,4 +1,5 @@
 import 'package:agile_frontend/page/finding_roommate/finding_roommate_condition2.dart';
+import 'package:agile_frontend/page/finding_roommate/roommate_find_page.dart';
 import 'package:agile_frontend/util/device/screen.dart';
 import 'package:agile_frontend/widget/life_style_button.dart';
 import 'package:flutter/material.dart';
@@ -82,36 +83,12 @@ class FindingRoommateConditionPage5 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 OutlinedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    fixedSize: MaterialStateProperty.all<Size>(Size(
-                      Screen.designToScreenWidth(context, 180),
-                      Screen.designToScreenHeight(context, 40),
-                    )),
-                    side: MaterialStateProperty.all<BorderSide>(
-                        const BorderSide(color: Colors.grey)),
-                    alignment: Alignment.center,
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    )),
-                  ),
-                  child: const Text("Skip"),
-                ),
-                Padding(
-                    padding: EdgeInsets.only(
-                        left: Screen.designToScreenWidth(context, 11))),
-                OutlinedButton(
                   onPressed: () {
-                    Get.to(FindingRoommateConditionPage2());
+                    Get.to(RoommateFindPage());
                   },
                   style: ButtonStyle(
                     fixedSize: MaterialStateProperty.all<Size>(Size(
-                      Screen.designToScreenWidth(context, 180),
+                      Screen.designToScreenWidth(context, 390),
                       Screen.designToScreenHeight(context, 40),
                     )),
                     side: MaterialStateProperty.all<BorderSide>(
@@ -124,10 +101,10 @@ class FindingRoommateConditionPage5 extends StatelessWidget {
                         const Color.fromRGBO(254, 142, 72, 1)),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(8),
                     )),
                   ),
-                  child: Text("Next"),
+                  child: const Text("Done"),
                 ),
               ],
             ),

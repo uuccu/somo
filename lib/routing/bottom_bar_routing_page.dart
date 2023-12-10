@@ -1,5 +1,6 @@
 import 'package:agile_frontend/page/SavedPage.dart';
 import 'package:agile_frontend/page/community_page.dart';
+import 'package:agile_frontend/page/finding_roommate/finding_roommate_condition.dart';
 import 'package:agile_frontend/page/google_map_page.dart';
 import 'package:agile_frontend/page/my_home_page.dart';
 import 'package:agile_frontend/page/profile_page.dart';
@@ -20,7 +21,7 @@ class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
     const MyHomePage(),
     const SavedPage(),
     GoogleMapPage(),
-    const CommunityPage(),
+    FindingRoommateConditionPage1(),
     const ProfilePage(),
   ];
 
