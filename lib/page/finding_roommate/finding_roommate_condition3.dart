@@ -1,5 +1,7 @@
 import 'package:agile_frontend/page/finding_roommate/finding_roommate_condition2.dart';
 import 'package:agile_frontend/page/finding_roommate/finding_roommate_condition4.dart';
+import 'package:agile_frontend/page/finding_roommate/roommate_find_page.dart';
+import 'package:agile_frontend/page/my_home_page.dart';
 import 'package:agile_frontend/util/device/screen.dart';
 import 'package:agile_frontend/widget/life_style_button.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +84,9 @@ class FindingRoommateConditionPage3 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(RoommateFindPage());
+                  },
                   style: ButtonStyle(
                     fixedSize: MaterialStateProperty.all<Size>(Size(
                       Screen.designToScreenWidth(context, 180),

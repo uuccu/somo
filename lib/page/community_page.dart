@@ -1,7 +1,12 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, use_key_in_widget_constructors
 
+import 'package:agile_frontend/page/finding_roommate/finding_roommate_condition.dart';
+import 'package:agile_frontend/util/device/screen.dart';
+import 'package:agile_frontend/widget/line.dart';
+import 'package:agile_frontend/widget/search_box.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class CommunityPage extends StatelessWidget {
   @override
@@ -9,13 +14,6 @@ class CommunityPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: IconButton(
-          // icon like <
-          icon: Icon(Icons.arrow_back_ios),
-          color: Colors.grey[400],
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        // add text and go to center
         centerTitle: true,
         title: Text(
           'Community',
@@ -24,70 +22,37 @@ class CommunityPage extends StatelessWidget {
             // Add other TextStyle properties as needed
           ),
         ),
-        backgroundColor: Colors.white, // Set the background color of the AppBar
+        surfaceTintColor: Colors.white,
+        backgroundColor:
+            Colors.transparent, // Set the background color of the AppBar
         elevation: 0, // Removes the shadow from the AppBar
       ),
       // padding for body
       body: ListView(
         children: <Widget>[
-          Padding (
-            padding: EdgeInsets.symmetric(horizontal: 16),
+          Padding(
+            padding: EdgeInsets.only(
+              left: Screen.designToScreenWidth(context, 20),
+              right: Screen.designToScreenWidth(context, 20),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // line divider
-                Divider(height: 1, color: Colors.grey[300]),
-                SizedBox(height: 8),
-                SearchWidget(),
+                Line(context: context, width: 390),
+                SizedBox(height: Screen.designToScreenHeight(context, 8)),
+                SearchScreen(),
+                SizedBox(height: Screen.designToScreenHeight(context, 18)),
                 BulletinBoard(),
+                SizedBox(height: Screen.designToScreenHeight(context, 15)),
                 HomeRating(),
+                SizedBox(height: Screen.designToScreenHeight(context, 15)),
                 FindingMate(),
                 // ... Add more widgets here
               ],
             ),
           ),
         ],
-      ),
-      
-    );
-  }
-}
-
-
-class SearchWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      // size the container smaller
-      height: 35,
-      padding: EdgeInsets.symmetric(horizontal: 8), // Add horizontal padding
-      margin: EdgeInsets.symmetric(horizontal: 0, vertical: 7), // Add some margin
-      decoration: BoxDecoration(
-        color: Colors.white, // Background color of the search bar
-        borderRadius: BorderRadius.circular(10), // Rounded corners
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5), // Shadow color
-            spreadRadius: 2, // Spread radius
-            blurRadius: 7, // Blur radius
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      child: TextField(
-        // make it center vertically
-        decoration: InputDecoration(
-          hintText: 'Search whatever you want!',
-          // color hint text
-          hintStyle: TextStyle(color: Colors.grey[400], fontSize: 15),
-          prefixIcon: Icon(Icons.search, color: Colors.orange , size: 18),
-          // make the icon smaller
-          prefixIconConstraints: BoxConstraints(
-            minWidth: 30,
-            minHeight: 18,
-          ),
-          border: InputBorder.none, // Remove border
-        ),
       ),
     );
   }
@@ -96,7 +61,14 @@ class SearchWidget extends StatelessWidget {
 class BulletinBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Card (
+    return Card(
+      color: Colors.white,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.grey, width: 0.5),
+        borderRadius: BorderRadius.circular(5),
+      ),
       child: Column(
         children: [
           ListTile(
@@ -115,22 +87,26 @@ class BulletinBoard extends StatelessWidget {
             ),
           ),
           PostBulletinBoard(
-            avatar: 'asset/image/user/pfp1.jpg', // replace with your asset image
+            avatar:
+                'asset/image/user/pfp1.jpg', // replace with your asset image
             username: 'lovely_fresher',
             grade: '3rd grade | students',
             date: '2023.11.16.',
             title: 'Be careful!',
-            content: 'I got scammed at the agency in front of the school i trusted it but the agency is ...',
+            content:
+                'I got scammed at the agency in front of the school i trusted it but the agency is ...',
           ),
           PostBulletinBoard(
-            avatar: 'asset/image/user/pfp4.jpg', // replace with your asset image
+            avatar:
+                'asset/image/user/pfp4.jpg', // replace with your asset image
             username: 'agile_win',
             grade: '2nd grade | students',
             date: '2023.11.14.',
             title: 'Who wants to sign a room here',
-            content: 'I had a situation so I left earlier than the contract period, but the condition of ...',
+            content:
+                'I had a situation so I left earlier than the contract period, but the condition of ...',
           ),
-          SizedBox(height: 8)
+          SizedBox(height: Screen.designToScreenHeight(context, 8))
         ],
       ),
       elevation: 8,
@@ -157,16 +133,23 @@ class PostBulletinBoard extends StatelessWidget {
   }) : super(key: key);
 
   @override
-
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.white,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
       child: Column(
         children: [
           Row(
             children: [
               // avatar
               Padding(
-                padding: EdgeInsets.all(8),
+                padding: EdgeInsets.only(
+                  left: Screen.designToScreenWidth(context, 13),
+                  right: Screen.designToScreenWidth(context, 13),
+                  bottom: Screen.designToScreenHeight(context, 8),
+                  top: Screen.designToScreenHeight(context, 8),
+                ),
                 child: CircleAvatar(
                   backgroundImage: AssetImage(avatar),
                   radius: 20,
@@ -201,7 +184,7 @@ class PostBulletinBoard extends StatelessWidget {
             ],
           ),
           // size box
-          SizedBox(height: 2),
+          SizedBox(height: Screen.designToScreenHeight(context, 2)),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),
             child: Column(
@@ -215,7 +198,7 @@ class PostBulletinBoard extends StatelessWidget {
                 Text(
                   content,
                   style: TextStyle(fontSize: 13),
-                  ),
+                ),
               ],
             ),
           ),
@@ -229,34 +212,54 @@ class PostBulletinBoard extends StatelessWidget {
 class HomeRating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Card (
+    return Card(
+      color: Colors.white,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.grey, width: 0.5),
+        borderRadius: BorderRadius.circular(5),
+      ),
       child: Column(
         children: [
-          ListTile(
-            title: Text(
-              'Home rating',
-              style: TextStyle(fontSize: 18),
+          Container(
+            padding: EdgeInsets.only(
+              top: Screen.designToScreenHeight(context, 8),
             ),
-            trailing: TextButton(
-              onPressed: () {
-                // Handle "see more" action
-              },
-              child: Text(
-                'see more >',
-                style: TextStyle(color: Colors.orange),
-              ),
+            height: Screen.designToScreenHeight(context, 40), // 원하는 높이로 설정하세요.
+            child: Row(
+              children: <Widget>[
+                SizedBox(width: Screen.designToScreenWidth(context, 13)),
+                Text(
+                  'Home rating',
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(width: Screen.designToScreenWidth(context, 150)),
+                TextButton(
+                  onPressed: () {
+                    // Handle "see more" action
+                  },
+                  child: Text(
+                    'see more >',
+                    style: TextStyle(color: Colors.orange),
+                  ),
+                ),
+              ],
             ),
           ),
           PostHomeRating(
             photo: 'asset/image/house/house1.jpg',
             address: '206 Street 06, Phnom Penh',
-            avatar: 'asset/image/user/pfp3.png', // replace with your asset image
+            avatar:
+                'asset/image/user/pfp3.png', // replace with your asset image
             username: 'homie',
             grade: '4th grade | students',
             date: '2023.09.02.',
             title: 'Recommendation for Students New to the Area',
-            satisfaction: 'I contacted the landlord whenever issues arose, and \nthe response was quick.',
-            dissatisfaction: 'There was significant noise between floors, causing \ndiscomfort at night.',
+            satisfaction:
+                'I contacted the landlord whenever issues arose, and the response was quick.',
+            dissatisfaction:
+                'There was significant noise between floors, causing discomfort at night.',
           ),
         ],
       ),
@@ -290,108 +293,118 @@ class PostHomeRating extends StatelessWidget {
   }) : super(key: key);
 
   @override
-
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.white,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
       child: Column(
         children: [
-          // size box
-          SizedBox(height: 2),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+            padding: EdgeInsets.only(
+              left: Screen.designToScreenWidth(context, 13),
+              // right: Screen.designToScreenWidth(context, 13),
+            ),
             child: Row(
               children: [
-                // put the image 
                 Column(
                   children: [
-                    Container(
-                      // create the image from photo
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
                       child: Image.asset(
                         photo,
-                        width: 100,
-                        height: 120,
+                        width: Screen.designToScreenWidth(context, 104),
+                        height: Screen.designToScreenHeight(context, 112),
                         fit: BoxFit.cover,
-                        
                       ),
                     ),
-                    SizedBox(height: 4),
+                    SizedBox(height: Screen.designToScreenHeight(context, 9)),
                     Text(
-                    address,
-                    style: TextStyle(fontSize: 8),
-                  ),
+                      address,
+                      style: TextStyle(fontSize: 8),
+                    ),
                   ],
-                  
                 ),
-                
-                SizedBox(width: 14),
+                SizedBox(width: Screen.designToScreenWidth(context, 14)),
                 Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      // avatar
-                      Padding(
-                        padding: EdgeInsets.only(right: 8),
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage(avatar),
-                          radius: 20,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              right: Screen.designToScreenWidth(context, 8)),
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage(avatar),
+                            radius: 20,
+                          ),
                         ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              username,
+                              style: TextStyle(fontSize: 13),
+                            ),
+                            Text(
+                              grade,
+                              style: TextStyle(
+                                  fontSize: 10, color: Colors.grey[500]),
+                            ),
+                            Text(
+                              date,
+                              style: TextStyle(
+                                  fontSize: 10, color: Colors.grey[500]),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                            width: Screen.designToScreenWidth(context, 48)),
+                        IconButton(
+                          icon: Icon(Icons.more_vert),
+                          onPressed: () {
+                            // Handle "more" actions
+                          },
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: Screen.designToScreenWidth(context, 215),
+                      child: Text(
+                        '[$title]',
+                        style: TextStyle(fontSize: 10),
                       ),
-                      // username, grade, date
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            username,
-                            style: TextStyle(fontSize: 13),
-                          ),
-                          Text(
-                            grade,
-                            style: TextStyle(fontSize: 10, color: Colors.grey[500]),
-                          ),
-                          Text(
-                            date,
-                            style: TextStyle(fontSize: 10, color: Colors.grey[500]),
-                          ),
-                        ],
+                    ),
+                    Text(
+                      'Satisfactory Aspects',
+                      style: TextStyle(fontSize: 10, color: Colors.orange),
+                    ),
+                    SizedBox(
+                      width: Screen.designToScreenWidth(context, 215),
+                      child: Text(
+                        satisfaction,
+                        style: TextStyle(fontSize: 10),
+                        softWrap: true,
                       ),
-                      SizedBox(width: 48),
-                      // more button
-                      IconButton(
-                        icon: Icon(Icons.more_vert),
-                        onPressed: () {
-                          // Handle "more" actions
-                        },
+                    ),
+                    Text(
+                      'Dissatisfactory Aspects',
+                      style: TextStyle(fontSize: 10, color: Colors.orange),
+                    ),
+                    SizedBox(
+                      width: Screen.designToScreenWidth(context, 215),
+                      child: Text(
+                        dissatisfaction,
+                        style: TextStyle(fontSize: 10),
+                        softWrap: true,
                       ),
-                    ],
-                  ),
-                  Text(
-                    '[$title]',
-                    style: TextStyle(fontSize: 10),
-                  ),
-                  Text(
-                    'Satisfactory Aspects',
-                    style: TextStyle(fontSize: 10, color: Colors.orange),
-                  ),
-                  Text(
-                    satisfaction,
-                    style: TextStyle(fontSize: 10),
-
-                  ),
-                  Text(
-                    'Dissatisfactory Aspects',
-                    style: TextStyle(fontSize: 10, color: Colors.orange),
-                  ),
-                  Text(
-                    dissatisfaction,
-                    style: TextStyle(fontSize: 10),
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
-          SizedBox (height: 8),
+          SizedBox(height: Screen.designToScreenHeight(context, 8)),
         ],
       ),
       elevation: 0,
@@ -399,11 +412,17 @@ class PostHomeRating extends StatelessWidget {
   }
 }
 
-
 class FindingMate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Card (
+    return Card(
+      color: Colors.white,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.grey, width: 0.5),
+        borderRadius: BorderRadius.circular(5),
+      ),
       child: Column(
         children: [
           ListTile(
@@ -413,7 +432,7 @@ class FindingMate extends StatelessWidget {
             ),
             trailing: TextButton(
               onPressed: () {
-                // Handle "see more" action
+                Get.to(FindingRoommateConditionPage1());
               },
               child: Text(
                 'see more >',
@@ -424,12 +443,14 @@ class FindingMate extends StatelessWidget {
           PostFindingMate(
             photo: 'asset/image/house/house2.jpg',
             address: '206 Street 06, Phnom Penh',
-            avatar: 'asset/image/user/pfp5.jpg', // replace with your asset image
+            avatar:
+                'asset/image/user/pfp5.jpg', // replace with your asset image
             username: 'bts_lover',
             grade: '1st grade | students',
             date: '2023.10.02.',
             title: 'Looking for a roommate who can live considerately',
-            content: 'Hello! I\'ve come here alone from the provinces and \nlooking for a roommate to share accommodation. \nI\'m an early riser and I tend to clean the house \nfrequently. During exam periods, I might study until \nthe early morning, so I may need to keep the lights \non late. Since it\'s a shared space, It would be ...',
+            content:
+                'Hello! I\'ve come here alone from the provinces and looking for a roommate to share accommodation.I\'m an early riser and I tend to clean the house \nfrequently. During exam periods, I might study until \nthe early morning, so I may need to keep the lights on late. Since it\'s a shared space, It would be ...',
           ),
         ],
       ),
@@ -461,95 +482,95 @@ class PostFindingMate extends StatelessWidget {
   }) : super(key: key);
 
   @override
-
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.white,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
       child: Column(
         children: [
-          // size box
-          SizedBox(height: 2),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+            padding: EdgeInsets.only(
+              left: Screen.designToScreenWidth(context, 13),
+              // right: Screen.designToScreenWidth(context, 13),
+            ),
             child: Row(
               children: [
-                // put the image 
                 Column(
                   children: [
-                    Container(
-                      // create the image from photo
-                      child: Image.asset(
-                        photo,
-                        width: 100,
-                        height: 120,
-                        fit: BoxFit.cover,
-                        
+                    Image.asset(
+                      photo,
+                      width: Screen.designToScreenWidth(context, 100),
+                      height: Screen.designToScreenHeight(context, 120),
+                      fit: BoxFit.cover,
+                    ),
+                    SizedBox(height: Screen.designToScreenHeight(context, 4)),
+                    Text(
+                      address,
+                      style: TextStyle(fontSize: 8),
+                    ),
+                  ],
+                ),
+                SizedBox(width: Screen.designToScreenWidth(context, 14)),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(right: 8),
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage(avatar),
+                            radius: 20,
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              username,
+                              style: TextStyle(fontSize: 13),
+                            ),
+                            Text(
+                              grade,
+                              style: TextStyle(
+                                  fontSize: 10, color: Colors.grey[500]),
+                            ),
+                            Text(
+                              date,
+                              style: TextStyle(
+                                  fontSize: 10, color: Colors.grey[500]),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                            width: Screen.designToScreenWidth(context, 48)),
+                        IconButton(
+                          icon: Icon(Icons.more_vert),
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: Screen.designToScreenWidth(context, 215),
+                      child: Text(
+                        title,
+                        style: TextStyle(fontSize: 10, color: Colors.orange),
                       ),
                     ),
-                    SizedBox(height: 4),
-                    Text(
-                    address,
-                    style: TextStyle(fontSize: 8),
-                  ),
+                    SizedBox(
+                      width: Screen.designToScreenWidth(context, 215),
+                      child: Text(
+                        content,
+                        style: TextStyle(fontSize: 10),
+                      ),
+                    ),
                   ],
-                  
                 ),
-                
-                SizedBox(width: 14),
-                Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      // avatar
-                      Padding(
-                        padding: EdgeInsets.only(right: 8),
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage(avatar),
-                          radius: 20,
-                        ),
-                      ),
-                      // username, grade, date
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            username,
-                            style: TextStyle(fontSize: 13),
-                          ),
-                          Text(
-                            grade,
-                            style: TextStyle(fontSize: 10, color: Colors.grey[500]),
-                          ),
-                          Text(
-                            date,
-                            style: TextStyle(fontSize: 10, color: Colors.grey[500]),
-                          ),
-                        ],
-                      ),
-                      SizedBox(width: 48),
-                      // more button
-                      IconButton(
-                        icon: Icon(Icons.more_vert),
-                        onPressed: () {
-                          // Handle "more" actions
-                        },
-                      ),
-                    ],
-                  ),
-                  Text(
-                    title,
-                    style: TextStyle(fontSize: 10, color: Colors.orange),
-                  ),
-                  Text(
-                    content,
-                    style: TextStyle(fontSize: 10),
-                  ),
-                ],
-              ),
               ],
             ),
           ),
-          SizedBox (height: 8),
+          SizedBox(height: Screen.designToScreenHeight(context, 8)),
         ],
       ),
       elevation: 0,

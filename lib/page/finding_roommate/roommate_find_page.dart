@@ -11,7 +11,8 @@ class _RoommateFindPageState extends State<RoommateFindPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: const Center(
-        child: Text('Roommate Find Page'),
+        child: Text(
+            'Roommate Find Page Not Implemented Yet Thank You! :)\n This app made by Agile Team'),
       ),
       bottomNavigationBar: BottomBarRoutingPage(),
     );

@@ -21,7 +21,7 @@ class _BottomBarRoutingPageState extends State<BottomBarRoutingPage> {
     const MyHomePage(),
     const SavedPage(),
     GoogleMapPage(),
-    FindingRoommateConditionPage1(),
+    CommunityPage(),
     const ProfilePage(),
   ];
 

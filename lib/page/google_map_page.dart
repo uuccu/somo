@@ -74,7 +74,7 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
   Future<Marker> Function(Cluster<PlaceModel>) get markerBuilder =>
       (cluster) async {
         int length = cluster.count;
-        int size = Screen.designToScreenHeight(context, 50).toInt();
+        int size = Screen.designToScreenHeight(context, 125).toInt();
         return Marker(
             markerId: MarkerId(cluster.isMultiple
                 ? cluster.getId()
